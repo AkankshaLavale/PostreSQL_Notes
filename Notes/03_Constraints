@@ -1,1 +1,154 @@
-Constraints 
+# Constraints in PostgreSQL
+
+Constraints are rules applied on table columns to control data and maintain accuracy, validity, and integrity of data.
+
+They help prevent wrong or duplicate data from being stored in the table.
+
+---
+
+## Types of Constraints
+
+- NOT NULL  
+- UNIQUE  
+- PRIMARY KEY  
+- FOREIGN KEY  
+- CHECK  
+- DEFAULT  
+
+---
+
+## 1️⃣ NOT NULL
+
+NOT NULL ensures that a column cannot store NULL (empty) values.
+
+### Syntax
+
+column_name datatype NOT NULL
+
+### Example
+
+CREATE TABLE students(
+student_name VARCHAR(50) NOT NULL,
+student_age INT
+);
+
+---
+
+## 2️⃣ UNIQUE
+
+UNIQUE ensures all values in a column are different.
+
+### Syntax
+
+column_name datatype UNIQUE
+
+### Example
+
+CREATE TABLE students(
+email VARCHAR(100) UNIQUE
+);
+
+---
+
+## 3️⃣ PRIMARY KEY
+
+PRIMARY KEY uniquely identifies each row in a table.
+
+- Cannot be NULL  
+- Cannot have duplicate values  
+- Only one primary key per table
+
+### Syntax
+
+column_name datatype PRIMARY KEY
+
+### Example
+
+CREATE TABLE students(
+student_id INT PRIMARY KEY,
+student_name VARCHAR(50)
+);
+
+---
+
+## 4️⃣ FOREIGN KEY
+
+FOREIGN KEY creates relationship between two tables.
+
+It refers to PRIMARY KEY of another table.
+
+### Syntax
+
+FOREIGN KEY(column_name)
+REFERENCES parent_table(parent_column)
+
+### Example
+
+CREATE TABLE orders(
+order_id INT PRIMARY KEY,
+student_id INT,
+FOREIGN KEY(student_id)
+REFERENCES students(student_id)
+);
+
+---
+
+## 5️⃣ CHECK
+
+CHECK applies condition on values.
+
+### Syntax
+
+column_name datatype CHECK(condition)
+
+### Example
+
+CREATE TABLE students(
+student_age INT CHECK(student_age >= 18)
+);
+
+---
+
+## 6️⃣ DEFAULT
+
+DEFAULT gives automatic value if user does not insert any value.
+
+### Syntax
+
+column_name datatype DEFAULT value
+
+### Example
+
+CREATE TABLE students(
+city VARCHAR(30) DEFAULT 'Nashik'
+);
+
+---
+
+## Combined Example
+
+CREATE TABLE students(
+student_id INT PRIMARY KEY,
+student_name VARCHAR(50) NOT NULL,
+email VARCHAR(100) UNIQUE,
+student_age INT CHECK(student_age >= 18),
+city VARCHAR(30) DEFAULT 'Nashik'
+);
+
+---
+
+## Important Notes
+
+- Constraints improve data quality.
+- PRIMARY KEY = UNIQUE + NOT NULL
+- FOREIGN KEY maintains relation between tables.
+- CHECK validates custom conditions.
+- DEFAULT saves time by auto inserting value.
+
+---
+
+## Interview Question
+
+What are constraints in PostgreSQL?
+
+Constraints are rules applied on columns to restrict invalid data and maintain database integrity.
