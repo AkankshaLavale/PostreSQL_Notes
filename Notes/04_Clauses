@@ -1,0 +1,179 @@
+# Clauses in PostgreSQL
+
+Clauses are special keywords used in SQL queries to filter, sort, group, and limit data.
+
+They are mainly used with SELECT statements to control output.
+
+---
+
+## Common Clauses
+
+- WHERE  
+- ORDER BY  
+- GROUP BY  
+- HAVING  
+- LIMIT  
+- OFFSET  
+- DISTINCT  
+
+---
+
+## 1️⃣ WHERE
+
+WHERE is used to filter records based on condition.
+
+### Syntax
+
+SELECT column_name  
+FROM table_name  
+WHERE condition;
+
+### Example
+
+SELECT * FROM students
+WHERE student_age > 18;
+
+---
+
+## 2️⃣ ORDER BY
+
+ORDER BY is used to sort data in ascending or descending order.
+
+### Syntax
+
+SELECT column_name  
+FROM table_name  
+ORDER BY column_name ASC;
+
+OR
+
+SELECT column_name  
+FROM table_name  
+ORDER BY column_name DESC;
+
+### Example
+
+SELECT * FROM students
+ORDER BY student_name ASC;
+
+SELECT * FROM students
+ORDER BY student_age DESC;
+
+---
+
+## 3️⃣ GROUP BY
+
+GROUP BY is used to group rows having same values.
+
+Mostly used with aggregate functions.
+
+### Syntax
+
+SELECT column_name, aggregate_function(column_name)
+FROM table_name
+GROUP BY column_name;
+
+### Example
+
+SELECT div, COUNT(*)
+FROM students
+GROUP BY div;
+
+---
+
+## 4️⃣ HAVING
+
+HAVING is used to filter grouped data after GROUP BY.
+
+### Syntax
+
+SELECT column_name, aggregate_function(column_name)
+FROM table_name
+GROUP BY column_name
+HAVING condition;
+
+### Example
+
+SELECT div, COUNT(*)
+FROM students
+GROUP BY div
+HAVING COUNT(*) > 2;
+
+---
+
+## 5️⃣ LIMIT
+
+LIMIT is used to show fixed number of rows.
+
+### Syntax
+
+SELECT * FROM table_name
+LIMIT number;
+
+### Example
+
+SELECT * FROM students
+LIMIT 5;
+
+---
+
+## 6️⃣ OFFSET
+
+OFFSET skips rows before showing result.
+
+### Syntax
+
+SELECT * FROM table_name
+LIMIT number OFFSET number;
+
+### Example
+
+SELECT * FROM students
+LIMIT 5 OFFSET 2;
+
+---
+
+## 7️⃣ DISTINCT
+
+DISTINCT shows unique values only.
+
+### Syntax
+
+SELECT DISTINCT column_name
+FROM table_name;
+
+### Example
+
+SELECT DISTINCT div
+FROM students;
+
+---
+
+## Combined Example
+
+SELECT div, COUNT(*)
+FROM students
+WHERE student_age > 18
+GROUP BY div
+HAVING COUNT(*) > 1
+ORDER BY div ASC
+LIMIT 5;
+
+---
+
+## Important Notes
+
+- WHERE filters rows before grouping.
+- HAVING filters after GROUP BY.
+- ORDER BY sorts output.
+- LIMIT controls result size.
+- DISTINCT removes duplicate values.
+
+---
+
+## Interview Question
+
+What is difference between WHERE and HAVING?
+
+WHERE filters individual rows before grouping.  
+HAVING filters grouped records after GROUP BY.
